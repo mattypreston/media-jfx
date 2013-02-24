@@ -31,7 +31,7 @@ namespace :deploy do
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
       desc "Changing permissions on Unicorn admin script"
-      run "chmod 777 /home/ubuntu/apps/media-jfx/current/unicorn_init.sh"
+      run "chmod 777 /home/ubuntu/apps/media-jfx/#{current_path}/unicorn_init.sh"
       desc "Restarting Unicorn"
       run "#{sudo} /etc/init.d/unicorn_#{application} #{command}"
       desc "Restarting Nginx"
