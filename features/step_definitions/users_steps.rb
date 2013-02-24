@@ -18,8 +18,12 @@ end
 
 def create_user
   create_visitor
-  delete_user
-  @user = FactoryGirl.create(:user, email: @visitor[:email])
+  #delete_user
+  begin
+    @user = FactoryGirl.create(:user, email: @visitor[:email])
+  rescue Exception => e
+    puts e.message
+  end
 end
 
 def delete_user
@@ -40,6 +44,7 @@ end
 
 def sign_in
   visit '/users/sign_in'
+  puts @visitor
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
   click_button "Sign in"
@@ -176,7 +181,7 @@ Then /^I should see a mismatched password message$/ do
 end
 
 Then /^I should see a signed out message$/ do
-  page.should have_content "Signed out successfully."
+  page.should have_content "You need to sign in or sign up before continuing."
 end
 
 Then /^I see an invalid login message$/ do

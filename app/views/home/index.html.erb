@@ -1,4 +1,12 @@
-<h1>Home#index</h1>
+<h1>Home Page Placeholder</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-<%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+<ul>
+  <% @users.all.each do |user| %>
+    <li><%= "#{user.name} has a token of"%> <%=  user.authentication_token.blank? ? "Token Empty" : user.authentication_token %></li>
+  <% end %>
+</ul>
+
+
+
+<%= link_to('Logout', destroy_user_session_path, :method=>'delete')%> <%= current_user.name %>
