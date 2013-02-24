@@ -14,7 +14,7 @@ set :user, "ubuntu"
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
-
+set :keep_releases, 1
 set :scm, "git"
 set :repository,  "git@github.com:mattypreston/#{application}.git"
 set :branch, "master"
