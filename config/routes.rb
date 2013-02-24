@@ -1,3 +1,5 @@
+require 'api_constraints'
+
 MediaJfx::Application.routes.draw do
   get "home/index"
 
@@ -49,6 +51,13 @@ MediaJfx::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+  namespace :api, defaults: {format: 'json'} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      get 'users/get_users/:device_id' => 'users#get_users'
+    end
+  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
