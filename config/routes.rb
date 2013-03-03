@@ -1,6 +1,12 @@
 require 'api_constraints'
 
 MediaJfx::Application.routes.draw do
+  resources :devices
+
+
+  resources :sites
+
+
   get "home/index"
 
   devise_for :users

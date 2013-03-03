@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+  <%= render :partial=> 'layouts/nav_bar' %>
+<% end %>
+
+<div class="container">
+    <div class="row">
+      <div class="span12">
+        <%= render :partial=> 'layouts/messages' %>
+        <%= yield %>
+      </div>
+      <%#= render :partial=> 'layouts/side_bar' %>
+    </div><!--/row-->
+
+    <%= render :partial=> 'layouts/footer' %>
+
+</div> <!-- /container -->
