@@ -9,6 +9,12 @@ Given /^a set of sites like this:$/ do |table|
   pending
 end
 
+Given /^the following Sites exist$/ do |table|
+  table.hashes.each do |attributes|
+    Site.create :name => attributes[:name]
+  end
+end
+
 Then /^I visit the sites page$/ do
   visit '/sites'
 end

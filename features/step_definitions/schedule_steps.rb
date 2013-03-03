@@ -1,5 +1,5 @@
 def create_schedule
-  @schedule ||= { :content => "This is the article content which should be seen on the resume", :name => "Main Article" }
+  @schedule ||= { :name => "Test Schedule" }
 end
 
 Given /^a set of schedules like this:$/ do |table|
@@ -19,8 +19,8 @@ When /^I add a new schedule/ do
 end
 
 Then /^I should see that my new schedule has been added$/ do
-  page.should have_content @schedule[:name]
-  page.should have_content @schedule[:content]
+  page.should have_content "Test Device 1"
+  page.should have_content "Test Package 1"
 end
 
 Then /^I should see that my schedule has been added to my website/ do

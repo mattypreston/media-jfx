@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130303140222) do
+ActiveRecord::Schema.define(:version => 20130303153739) do
 
   create_table "devices", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(:version => 20130303140222) do
     t.text     "fxml"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "device_id"
+    t.integer  "package_id"
+    t.datetime "start_date_time"
+    t.datetime "end_date_time"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "sites", :force => true do |t|

@@ -1,6 +1,9 @@
 require 'api_constraints'
 
 MediaJfx::Application.routes.draw do
+  resources :schedules
+
+
   resources :packages
 
 

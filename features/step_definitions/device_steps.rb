@@ -6,11 +6,13 @@ Given /^a set of devices like this:$/ do |table|
   pending
 end
 
-Given /^the following Sites exist$/ do |table|
+Given /^the following Devices exist$/ do |table|
   table.hashes.each do |attributes|
-    Site.create :name => attributes[:name]
+    Device.create :name => attributes[:name]
   end
 end
+
+
 
 Then /^I visit the devices page$/ do
   visit '/devices'

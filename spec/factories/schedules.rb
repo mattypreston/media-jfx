@@ -2,8 +2,9 @@
 
 FactoryGirl.define do
   factory :schedule do
-    #device_id Device.all.first.id
-    #package_id Package.all.first.id
-    date_time Date.today.at_midnight
+    device_id 1
+    package_id 1
+    start_date_time "2013-03-03 15:34:59"
+    end_date_time "2013-03-03 15:34:59"
   end
 end

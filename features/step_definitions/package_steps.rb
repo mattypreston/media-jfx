@@ -19,6 +19,12 @@ Given /^a set of packages like this:$/ do |table|
   pending
 end
 
+Given /^the following Packages exist$/ do |table|
+  table.hashes.each do |attributes|
+    Package.create :name => attributes[:name]
+  end
+end
+
 Then /^I visit the packages page$/ do
   visit '/packages'
 end
