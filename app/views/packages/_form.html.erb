@@ -1,9 +1,17 @@
 <%= simple_form_for @package, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :name %>
-  <%= f.input :fxml %>
-  <div class="form-actions">
-    <%= f.button :submit, :class => 'btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                packages_path, :class => 'btn' %>
-  </div>
+    <%= f.input :name %>
+
+    <div class="control-group">
+      <%= f.label :fxml, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :fxml, :class => 'input-large search-query' %>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  packages_path, :class => 'btn' %>
+    </div>
 <% end %>
