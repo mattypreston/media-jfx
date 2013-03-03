@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :package do
-    name 'Test Package Name'
-    fxml '<FXML></FXML>'
+    name "MyString"
+    fxml "MyString"
   end
 end
