@@ -10,3 +10,10 @@ Feature: Media API
     Then show me the response
     Then the response status should be "200"
     And the JSON response should have an array of "1" records
+  #Scenario: Check invalid device id response returns an error
+  #  pending
+  #Scenario: Check package has a status of live
+  #  If they request a package but their account is frozen the app needs to know
+  #  so it will stop working.
+
+

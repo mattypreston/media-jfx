@@ -25,6 +25,31 @@ module Api
           end
         end
       end
+
+      def get_package
+        begin
+
+          if params[:device_id].present?
+            if params[:date_time].present?
+
+            else
+              #Assume current date
+
+            end
+          else
+            # Error
+          end
+
+        rescue Exception => e
+
+        end
+
+      end
+
+      def get_asset
+
+      end
+
     end
   end
 end

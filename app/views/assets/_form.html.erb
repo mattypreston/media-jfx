@@ -1,0 +1,63 @@
+<%= simple_form_for @asset, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.association :package %>
+  <%= f.input :name %>
+
+  <% if @asset.id.present? %>
+    <div class="control-group">
+      <div class="controls">
+        <div id="fileupload">
+          <%= image_tag @asset.asset_file.present? ? @asset.asset_file : "default-image.jpg", :id => 'asset_file' %>
+        </div>
+        <div id="progress" class="ui-progressbar ui-widget ui-widget-content ui-corner-all">
+          <span id="image-drag-text">Drag package asset here...</span>
+
+          <div class="bar"></div>
+        </div>
+        <div id="file-browse">
+          <%= f.file_field :asset_file, :id => 'btn_upload' %>
+        </div>
+      </div>
+    </div>
+        <script>
+            var asset_id = <%= @asset.id.nil? ? 'null' :  @asset.id %>;
+            $(function () {
+                $('#fileupload, #btn_upload').fileupload({
+                    dataType:'json',
+                    url:'/controllers/'+ asset_id +'/assets/' + asset_id + '/add_image_to_asset.json',
+                    add:function (e, data) {
+                        $('#progress').show();
+                        console.log("Attempting to upload file");
+                        data.submit();
+                    },
+                    progress:function (e, data) {
+                        var progress = parseInt(data.loaded / data.total * 100, 10);
+                        $('#progress .bar').css(
+                                'width',
+                                progress + '%'
+                        );
+                    },
+                    done:function (e, data) {
+                        console.log(data);
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#asset_file')
+                                    .attr('src', e.target.result)
+                                    .width(200)
+                                    .height(200);
+                        };
+
+                        reader.readAsDataURL(data.originalFiles[0]);
+                        $('#progress').hide();
+                    }
+                });
+            });
+        </script>
+<% end %>
+
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                assets_path, :class => 'btn' %>
+  </div>
+<% end %>
