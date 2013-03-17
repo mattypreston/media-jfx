@@ -39,6 +39,17 @@ namespace :deploy do
     end
   end
 
+  task :uploads_folder do
+    run "mkdir -p #{shared_path}/uploads"
+    run "#{sudo} chmod 775 #{shared_path}/uploads"
+  end
+  after 'deploy:setup', 'carrierwave:uploads_folder'
+
+  task :symlink do
+    run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
+  end
+  after 'deploy', 'carrierwave:symlink'
+
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
