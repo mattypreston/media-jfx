@@ -48,7 +48,7 @@ namespace :deploy do
   task :symlink do
     run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
   end
-  after 'deploy', 'carrierwave:symlink'
+  after 'deploy', 'deploy:symlink'
 
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
