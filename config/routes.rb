@@ -18,9 +18,8 @@ MediaJfx::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       get 'users/get_users/:device_id' => 'users#get_users'
-      get 'media/get_fxml/:device_id' => 'media#get_fxml'
-      get 'media/get_package/:device_id/:date_time' => 'media#get_package'
-      get 'media/get_asset/:package_id/:asset_id' => 'media#get_asset'
+      get 'media/get_packages_for_device/:device_id' => 'media#get_packages_for_device'
+      get 'media/get_package/:package_id' => 'media#get_package'
     end
   end
 

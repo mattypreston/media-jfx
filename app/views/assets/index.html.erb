@@ -22,7 +22,7 @@
         <% if asset.asset_file.present? %>
         <td><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
         <% else %>
-        <td>File uploaded yet...</td>
+        <td>Waiting for file to be uploaded...</td>
         <% end %>
         <td><%=l asset.created_at %></td>
         <td>

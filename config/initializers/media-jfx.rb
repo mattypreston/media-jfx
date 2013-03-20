@@ -1,0 +1,1 @@
+MEDIA_JFX_CONFIG = YAML.load_file("#{Rails.root}/config/media-jfx.yml")[Rails.env]

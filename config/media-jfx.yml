@@ -1,0 +1,5 @@
+development:
+  url_prefix: http://localhost:3000
+
+production:
+  url_prefix: http://media-jfx.com
