@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ErrorController < ApplicationController
+    class PingController < ApplicationController
       respond_to :xml, :json
 
     end
