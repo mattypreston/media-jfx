@@ -7,7 +7,8 @@ module Api
         @errors = []
         begin
           if params[:device_id].present?
-            @packages = Schedule.where("device_id = ?", params[:device_id])
+            @packages = Schedule.where("device_id = ? and start_date_time < ?", params[:device_id], Date.today).
+                                      order('start_date_time DESC')
             if @packages.empty?
               @errors << {:error_no => 1, :message => "no packages found for device_id : #{params[:device_id]}"}
             end
@@ -19,7 +20,7 @@ module Api
         end
         respond_to do |format|
           if @errors.empty?
-            format.json {render :json => @packages}
+            format.json {render :json => @packages.first}
           else
             format.json {render :json => {:errors => @errors}}
           end

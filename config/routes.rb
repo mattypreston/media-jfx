@@ -20,6 +20,9 @@ MediaJfx::Application.routes.draw do
       get 'users/get_users/:device_id' => 'users#get_users'
       get 'media/get_packages_for_device/:device_id' => 'media#get_packages_for_device'
       get 'media/get_package/:package_id' => 'media#get_package'
+
+      get 'authentication/get_token/:user_name' => 'authentication#get_token'
+
     end
   end
 
