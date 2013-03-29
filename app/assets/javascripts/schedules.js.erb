@@ -1,0 +1,39 @@
+//=require_self
+
+// All initialisation code should be placed in the document
+// ready anonymous function here.
+$(function () {
+    handleScheduleFormDates();
+});
+
+function handleScheduleFormDates()
+{
+    try
+    {
+
+        var startDate = new Date($('#schedule_start_date_time').val());
+        var endDate = new Date($('#schedule_end_date_time').val());
+
+        $('#schedule_start_date_time').val('');
+        $('#schedule_end_date_time').val('');
+
+        $('#datetimepicker1').datetimepicker({
+            language: 'en',
+            pick12HourFormat: true
+        });
+        $('#datetimepicker2').datetimepicker({
+            language: 'en',
+            pick12HourFormat: true
+        });
+
+        if (startDate != 'Invalid Date' || endDate != 'Invalid Date')
+        {
+            $('#schedule_start_date_time').val(formatDate(startDate));
+            $('#schedule_end_date_time').val(formatDate(endDate));
+        }
+    }
+    catch (e)
+    {
+        console.log(e.message);
+    }
+}

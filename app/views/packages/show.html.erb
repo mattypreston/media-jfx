@@ -1,5 +1,5 @@
 <%- model_class = Package -%>
-<div class="page-header">
+<div class="page-header" xmlns="http://www.w3.org/1999/html">
   <h1><%=t '.title', :default => model_class.model_name.human %></h1>
 </div>
 
@@ -8,7 +8,37 @@
   <dd><%= @package.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:fxml) %>:</strong></dt>
   <dd><%= @package.fxml %></dd>
+  <br/>
+  <div id="assets" style="position: relative; margin-left: 8em;">
+
+  </div>
+
 </dl>
+
+
+<script id="assetTemplate" type="media-jfx/template">
+  <strong>{{asset_name}}:</strong><br/>
+  <img src="{{image_url}}" >
+  <br/><br/>
+</script>
+
+<script>
+
+    template = $.trim($('#assetTemplate').html());
+    console.log(template);
+    var url = "<%=(URI.parse(root_url).to_s)[0...-1] %>";
+    console.log(url);
+    var frag = '';
+    $.each(<%= @package.assets.to_json.html_safe %>, function(index, obj)
+    {
+       console.log(obj);
+       frag += template.replace(/{{asset_name}}/ig, obj.name)
+                        .replace(/{{image_url}}/ig, url + obj.asset_file.url);
+                console.log(frag);
+    });
+    $('#assets').append(frag);
+</script>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

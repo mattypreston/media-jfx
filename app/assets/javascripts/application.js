@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//=require jquery-fileupload/basic
-//=require jquery-fileupload/vendor/tmpl
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require bootstrap-datetimepicker
 //= require_tree .

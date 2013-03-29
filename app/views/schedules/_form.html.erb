@@ -1,11 +1,43 @@
 <%= simple_form_for @schedule, :html => { :class => 'form-horizontal' } do |f| %>
+
     <%= f.association :device %>
     <%= f.association :package %>
-    <%= f.input :start_date_time %>
-    <%= f.input :end_date_time %>
+    <div id="main-content-wrap" class="row-fluid">
+      <%=  f.label :start_date_time %>
+      <section id="main-content" class="span6">
+        <div class="well">
+          <div id="datetimepicker1" class="input-append">
+            <!-- , :value => Time.now.strftime("%Y/%m/%d %H:%M:%S %p") -->
+            <%= f.text_field :start_date_time, { 'data-format' => "yyyy/MM/dd HH:mm:ss PP"} %>
+            <span class="add-on">
+              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+              </i>
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="main-content-wrap" class="row-fluid">
+      <%=  f.label :end_date_time %>
+      <section id="main-content" class="span6">
+        <div class="well">
+          <div id="datetimepicker2" class="input-append">
+            <%= f.text_field :end_date_time, { 'data-format' => "yyyy/MM/dd HH:mm:ss PP"} %>
+
+            <span class="add-on">
+              <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+              </i>
+            </span>
+          </div>
+        </div>
+      </section>
+    </div>
+
     <div class="form-actions">
       <%= f.button :submit, :class => 'btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   schedules_path, :class => 'btn' %>
     </div>
 <% end %>
+
+
