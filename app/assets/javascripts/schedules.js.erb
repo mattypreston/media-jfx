@@ -4,7 +4,82 @@
 // ready anonymous function here.
 $(function () {
     handleScheduleFormDates();
+    bindEventHandlers();
 });
+
+var scheduleId = 0;
+var targetElement = null;
+var url = null;
+var force = false;
+
+function bindEventHandlers()
+{
+    try
+    {
+        $(".force").on("click", function(event)
+        {
+            force = true;
+            targetElement = event.currentTarget;
+            scheduleId = targetElement.dataset.scheduleId;
+            $('#mdl_force').modal({
+              keyboard: false,
+              backdrop: 'static'
+            })
+        });
+
+        $(".unforce").on("click", function(event)
+        {
+            force = false;
+            targetElement = event.currentTarget;
+            scheduleId = targetElement.dataset.scheduleId;
+            $('#mdl_force').modal({
+              keyboard: false,
+              backdrop: 'static'
+            })
+        });
+
+        $("#mdl_force").on("shown", function(event){
+            makeRequestToForceSchedule($(this));
+        });
+    }
+    catch (e)
+    {
+        console.log(e.message);
+    }
+}
+
+
+function makeRequestToForceSchedule(event)
+{
+    //Need to grab the schedule id from the page
+    if (force)
+    {
+        console.log("Forcing schedule please wait...");
+        url = '/api/media/force_schedule_to_be_current/' + scheduleId + '.json'
+    }
+    else
+    {
+        console.log("Forcing schedule please wait...");
+        url = '/api/media/remove_force_flag_from_schedule/' + scheduleId + '.json'
+    }
+
+    console.log(url);
+    $.ajax({
+                url:url,
+                type: 'POST',
+                success:function (data) {
+                    $("#mdl_force").modal('toggle');
+                    console.log("request complete");
+                    console.log(data);
+                    //Now remove target element from the dom.
+                    window.location.reload();
+                },
+                failure:function () {
+                    console.log('error');
+                }
+            });
+
+}
 
 function handleScheduleFormDates()
 {

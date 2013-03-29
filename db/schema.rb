@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130316074407) do
+ActiveRecord::Schema.define(:version => 20130329111527) do
 
   create_table "assets", :force => true do |t|
     t.integer  "package_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130316074407) do
     t.datetime "end_date_time"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.boolean  "force_flag"
   end
 
   create_table "sites", :force => true do |t|

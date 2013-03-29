@@ -16,6 +16,18 @@ Feature: Media API
     Then the response status should be "200"
     And the JSON response should have an array of "1" records
 
+  Scenario: Force schedule to be current
+    Then I send a POST request to "/api/media/force_schedule_to_be_current/1.json?"
+    Then show me the response
+    Then the response status should be "200"
+    And the JSON response should have an array of "1" records
+
+  Scenario: Remove force flag from schedule
+    Then I send a POST request to "/api/media/remove_force_flag_from_schedule/1.json?"
+    Then show me the response
+    Then the response status should be "200"
+    And the JSON response should have an array of "1" records
+
   #Scenario: Check invalid device id response returns an error
   #  pending
   #Scenario: Check package has a status of live
