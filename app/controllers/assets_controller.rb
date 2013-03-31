@@ -84,11 +84,26 @@ class AssetsController < ApplicationController
   def add_image_to_asset
     @asset = Asset.find(params[:id])
     image_uploaded = false
-    if params[:asset][:asset_file].present?
-      @asset.asset_file = params[:asset][:asset_file].present? ? params[:asset][:asset_file] : nil
-      @asset.save!
-      image_uploaded = true
-      puts "Image uploaded"
+
+    if params[:files].present?
+
+      files = params[:files]
+      unless files.empty?
+        files.each do |file|
+          puts file.to_json
+        end
+      end
+
+    else
+      if params[:asset][:asset_file].present?
+        file = params[:asset][:asset_file]
+        media_type = file.content_type.split('/')[1]
+        @asset.asset_file = file.present? ? file : nil
+        @asset.media_type = media_type
+        @asset.save!
+        image_uploaded = true
+        puts "Image uploaded"
+      end
     end
     respond_to do |format|
       if image_uploaded

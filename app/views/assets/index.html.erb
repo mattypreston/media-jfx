@@ -9,7 +9,7 @@
       <th><%= model_class.human_attribute_name(:package_id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:asset_file) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:media_type) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -24,15 +24,10 @@
         <% else %>
         <td>Waiting for file to be uploaded...</td>
         <% end %>
-        <td><%=l asset.created_at %></td>
+        <td><%= asset.media_type %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_asset_path(asset), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      asset_path(asset),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <%= edit_button(edit_asset_path(asset)) %>
+          <%= delete_button(asset_path(asset)) %>
         </td>
       </tr>
     <% end %>

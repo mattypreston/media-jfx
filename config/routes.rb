@@ -5,6 +5,7 @@ MediaJfx::Application.routes.draw do
   resources :schedules, :packages,
             :devices, :sites
   resources :assets, path: '/controllers' do
+    post 'assets/:id/add_image_to_asset'=>'assets#add_image_to_asset', :defaults => { :format => 'json' }
     put 'assets/:id/add_image_to_asset'=>'assets#add_image_to_asset', :defaults => { :format => 'json' }
   end
 

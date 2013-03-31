@@ -22,19 +22,10 @@
         <td><%= schedule.start_date_time %></td>
         <td><%= schedule.end_date_time %></td>
         <td>
-          <% if schedule.force_flag %>
-          <button id="btn_force<%= schedule.id %>" class='btn btn-mini btn-success unforce' data-schedule-id="<%= schedule.id %>" data-target="#force">Unforce</button>
-          <% else %>
-          <button id="btn_force<%= schedule.id %>" class='btn btn-mini btn-primary force' data-schedule-id="<%= schedule.id %>" data-target="#force">Force</button>
-          <% end %>
+          <%= force_button(schedule) %>
           <%= render :partial => 'modal_dialog' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_schedule_path(schedule), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      schedule_path(schedule),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <%= edit_button edit_schedule_path(schedule) %>
+          <%= delete_button schedule_path(schedule) %>
         </td>
       </tr>
     <% end %>

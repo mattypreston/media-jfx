@@ -20,13 +20,8 @@
         <td><%= package.fxml %></td>
         <td><%=l package.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_package_path(package), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      package_path(package),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
+          <%= edit_button edit_package_path(package) %>
+          <%= delete_button package_path(package) %>
         </td>
       </tr>
     <% end %>
