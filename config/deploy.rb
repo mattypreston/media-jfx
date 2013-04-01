@@ -46,7 +46,7 @@ namespace :deploy do
   after 'deploy:setup', 'carrierwave:uploads_folder'
 
   task :symlink do
-    run "ln -nfs #{shared_path}/uploads #{release_path}/public/uploads"
+    run "ln -s #{shared_path}/uploads #{current_path}/public"
   end
   after 'deploy', 'deploy:symlink'
 
