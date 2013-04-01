@@ -49,7 +49,7 @@ module ApplicationHelper
             #{asset.media_type}
           </div>
         </div>".html_safe
-    end
+    end if asset.media_type.present?
 
   end
 
