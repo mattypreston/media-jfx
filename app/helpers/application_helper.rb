@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def sign_in_button(path)
+
+  end
+
   def edit_button(path)
     link_to(path, :class => 'btn btn-mini') do
         t('.edit', :default => t("helpers.links.edit")) + " <i class='icon-edit'></i>".html_safe
