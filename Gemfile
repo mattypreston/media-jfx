@@ -20,9 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'less-rails'
   gem 'twitter-bootstrap-rails'
+  gem 'bootstrap-datetimepicker-rails'
 end
-
-gem 'bootstrap-datetimepicker-rails'
 
 gem 'jquery-rails'
 gem 'jquery-fileupload-rails'

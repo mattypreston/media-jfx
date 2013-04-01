@@ -98,6 +98,7 @@ class AssetsController < ApplicationController
       if params[:asset][:asset_file].present?
         file = params[:asset][:asset_file]
         media_type = file.content_type.split('/')[1]
+        media_type = 'mov' if /quicktime/.match(media_type.downcase)
         @asset.asset_file = file.present? ? file : nil
         @asset.media_type = media_type
         @asset.save!

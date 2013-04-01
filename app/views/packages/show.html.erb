@@ -4,11 +4,24 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @package.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:fxml) %>:</strong></dt>
-  <dd><%= @package.fxml %></dd>
-  <br/>
+  <ul class="media-list">
+    <li class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object" data-src="holder.js/64x64">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading"><%= @package.name %></h4>
+        <%= @package.fxml %>
+      </div>
+    </li>
+    <% @package.assets.each do |asset| %>
+        <!-- Nested media object -->
+        <li class="media">
+          <%= render_media_as_thumbnail asset %>
+        </li>
+    <% end %>
+  </ul>
+
   <div id="assets" style="position: relative; margin-left: 8em;">
 
   </div>
@@ -16,20 +29,20 @@
 </dl>
 
 
-<script id="assetTemplate" type="media-jfx/template">
+<!--script id="assetTemplate" type="media-jfx/template">
   <strong>{{asset_name}}:</strong><br/>
   <img src="{{image_url}}" >
   <br/><br/>
-</script>
+</script-->
 
-<script>
+<!--script>
 
     template = $.trim($('#assetTemplate').html());
     console.log(template);
-    var url = "<%=(URI.parse(root_url).to_s)[0...-1] %>";
+    var url = "<%#=(URI.parse(root_url).to_s)[0...-1] %>";
     console.log(url);
     var frag = '';
-    $.each(<%= @package.assets.to_json.html_safe %>, function(index, obj)
+    $.each(<%#= @package.assets.to_json.html_safe %>, function(index, obj)
     {
        console.log(obj);
        frag += template.replace(/{{asset_name}}/ig, obj.name)
@@ -37,7 +50,7 @@
                 console.log(frag);
     });
     $('#assets').append(frag);
-</script>
+</script-->
 
 
 <div class="form-actions">

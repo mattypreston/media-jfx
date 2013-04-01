@@ -6,33 +6,22 @@
     <div class="control-group">
       <div class="controls">
         <div id="fileupload">
-          <% if @asset.media_type.eql?('mp4') %>
-              <div class="fileupload-new thumbnail" style="width: 320px; height: 240px;"><%= video_tag @asset.asset_file.present? ? @asset.asset_file : "default-image.jpg", :id => 'asset_file', :size => "320x240", :controls => true %></div>
-          <% else %>
-            <div class="fileupload-new thumbnail" style="width: 200px; height: 200px;"><%= image_tag @asset.asset_file.present? ? @asset.asset_file : "default-image.jpg", :id => 'asset_file' %></div>
-          <% end %>
-        </div>
-        <div class="progress" hidden="true" style="width: 30%;" >
-          <div class="bar" style="width: 0%;"></div>
-        </div>
-        <div id="file-browse" hidden="hidden">
-            <%= f.file_field :asset_file, :id => 'btn_upload' %>
+
+          <%= render_media @asset %>
+
         </div>
         <br/>
-        <a id="btn_browse" class="btn btn-success">
-          Select File <i class="icon-upload icon-white"></i>
-        </a>
+        <div class="progress" hidden="true" style="width: 320px;" >
+          <div class="bar" style="width: 0%;"></div>
+        </div>
+
+        <%= render_upload_button f %>
+
       </div>
     </div>
         <script>
             var asset_id = <%= @asset.id.nil? ? 'null' :  @asset.id %>;
             $(function () {
-
-                $("#btn_browse").on("click", function(event)
-                {
-                    $("#btn_upload").trigger('click');
-                });
-
 
                 $('#fileupload, #btn_upload').fileupload({
                     dataType:'json',
@@ -41,7 +30,7 @@
                         var goUpload = true;
                         var uploadFile = data.files[0];
                         console.log("Attempting to upload file");
-                        if (!(/\.(gif|jpg|jpeg|tiff|png|mp4|mp3|wav|avi|zip|gzip|gz|)$/i).test(uploadFile.name)) {
+                        if (!(/\.(gif|jpg|jpeg|tiff|png|mp4|mov|mpg|mp3|wav|avi|zip|gzip|gz|)$/i).test(uploadFile.name)) {
                             alert('File type not allowed');
                             goUpload = false;
                         }
@@ -67,16 +56,29 @@
                     },
                     done:function (e, data) {
                         console.log(data);
+                        window.location.reload();
                         var reader = new FileReader();
                         reader.onload = function (e) {
-                            $('#asset_file')
-                                    .attr('src', e.target.result)
-                                    .width(200)
-                                    .height(200);
+                            try {
+                                $('#asset_file')
+                                            .attr('src', e.target.result);
+                            }
+                            catch (e)
+                            {
+                                alert(e.message);
+                            }
                         };
-                        console.log(data.originalFiles[0].type);
-                        reader.readAsDataURL(data.originalFiles[0]);
+                        try
+                        {
+                            console.log(data.originalFiles[0].type);
+                            reader.readAsDataURL(data.originalFiles[0]);
+                        }
+                        catch(e)
+                        {
+                            alert(e.message);
+                        }
                         $('.progress').hide();
+                        window.location.reload();
                     }
                 });
             });
