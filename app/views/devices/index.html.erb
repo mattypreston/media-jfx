@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>#</th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:serial_number) %></th>
       <th><%= model_class.human_attribute_name(:site_id) %></th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @devices.each do |device| %>
       <tr>
-        <td><%= link_to device.id, device_path(device) %></td>
+        <td class="media-table-links"><%= link_to device.id, device_path(device) %></td>
         <td><%= device.name %></td>
         <td><%= device.serial_number %></td>
         <td><%= device.site.name %></td>

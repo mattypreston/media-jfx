@@ -8,16 +8,67 @@ html, body
   height:100%;
 }
 
+.media-fixed {
+  position: fixed;
+}
+
+.clear-headline-widgets {
+  margin-top: 120px;
+}
+
+.move-up {
+  margin: -20px;
+}
+
+.move-down {
+  position: relative;
+  top: 18px;
+}
+
+.media-headline-widget {
+  background-color: white;
+}
+
+.social a:hover, a:visited {
+  text-decoration: none !important;
+  color: #000000 !important;
+  background-color: white !important;
+}
+
+.media-navbar a:hover {
+  background-color: #0019c7 !important;
+  color: #008ec7 !important;
+}
+
+.media-actions a:visited, a:hover {
+  color: white !important;
+}
+
+.media-navbar a:visited {
+  color:  #ffffff !important;
+}
+
+
+.pull-right {
+  float: right !important;
+}
+
 .wrapper {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin:  0 auto -8em;
+  margin:  0 auto -9em;
 }
 
 .footer, .push {
-  height: 8em;
+  height: 9em;
 }
+
+@navbarBackground:              #0019c7;
+@navbarLinkColor:               #ffffff;
+@navbarBackgroundHighlight:     #0019c7;
+@navbarText:                    #008ec7;
+@navbarSearchPlaceHolderColor:  #EEC844;
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings");

@@ -4,8 +4,14 @@ module ApplicationHelper
 
   end
 
+  def sign_out_button(path)
+    link_to(path, :method => 'delete') do
+        t('.log_out', :default => t(".log_out")) + " <i class='icon-user icon-white'></i>".html_safe
+    end
+  end
+
   def edit_button(path)
-    link_to(path, :class => 'btn btn-mini') do
+    link_to(path, :class => 'btn btn-mini btn-success') do
         t('.edit', :default => t("helpers.links.edit")) + " <i class='icon-edit'></i>".html_safe
     end
   end

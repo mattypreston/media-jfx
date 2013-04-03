@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>#</th>
       <th><%= model_class.human_attribute_name(:package_id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:asset_file) %></th>
@@ -16,11 +16,11 @@
   <tbody>
     <% @assets.each do |asset| %>
       <tr>
-        <td><%= link_to asset.id, asset_path(asset) %></td>
+        <td class="media-table-links"><%= link_to asset.id, asset_path(asset) %></td>
         <td><%= asset.package.name %></td>
         <td><%= asset.name %></td>
         <% if asset.asset_file.present? %>
-        <td><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
+        <td class="media-table-links"><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
         <% else %>
         <td>Waiting for file to be uploaded...</td>
         <% end %>

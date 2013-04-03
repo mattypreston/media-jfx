@@ -1,10 +1,41 @@
-<h1>Welcome to Media JFX - Power to your Media!</h1>
+<div class="row-fluid media-fixed">
+  <div class="span2 offset1">
+    <div class="well media-headline-widget pagination-centered">
+      <h3 class="move-up">Users</h3>
+      <h3 class="move-down"><%= @users.count %></h3>
+    </div>
+  </div>
+  <div class="span2">
+    <div class="well media-headline-widget pagination-centered">
+      <h3 class="move-up">Sites</h3>
+      <h3 class="move-down"><%= @stats[:sites] %></h3>
+    </div>
+  </div>
+  <div class="span2">
+    <div class="well media-headline-widget pagination-centered">
+      <h3 class="move-up">Devices</h3>
+      <h3 class="move-down"><%= @stats[:devices] %></h3>
+    </div>
+  </div>
+  <div class="span2">
+    <div class="well media-headline-widget pagination-centered">
+      <h3 class="move-up">Packages</h3>
+      <h3 class="move-down"><%= @stats[:packages] %></h3>
+    </div>
+  </div>
+  <div class="span2">
+    <div class="well media-headline-widget pagination-centered">
+      <h3 class="move-up">Assets</h3>
+      <h3 class="move-down"><%= @stats[:assets] %></h3>
+    </div>
+  </div>
+</div>
 
-<p>We need to have a dashboard widget which displays what packages are in use and where.</p>
-
-<ul>
-  <% @users.all.each do |user| %>
-    <li><%= "#{user.name} has a token of"%> <%=  user.authentication_token.blank? ? "Token Empty" : user.authentication_token %></li>
-  <% end %>
-</ul>
+<div class="row-fluid clear-headline-widgets">
+    <ul class="unstyled pagination-centered">
+      <% @users.all.each do |user| %>
+        <li><%= "#{user.name} has a token of"%> <%=  user.authentication_token.blank? ? "Token Empty" : user.authentication_token %></li>
+      <% end %>
+    </ul>
+</div>
 

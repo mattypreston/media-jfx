@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>#</th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:fxml) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @packages.each do |package| %>
       <tr>
-        <td><%= link_to package.id, package_path(package) %></td>
+        <td class="media-table-links"><%= link_to package.id, package_path(package) %></td>
         <td><%= package.name %></td>
         <td><%= package.fxml %></td>
         <td><%=l package.created_at %></td>

@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th>#</th>
       <th><%= model_class.human_attribute_name(:device_id) %></th>
       <th><%= model_class.human_attribute_name(:package_id) %></th>
       <th><%= model_class.human_attribute_name(:start_date_time) %></th>
@@ -16,7 +16,7 @@
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td><%= link_to schedule.id, schedule_path(schedule) %></td>
+        <td class="media-table-links"><%= link_to schedule.id, schedule_path(schedule) %></td>
         <td><%= schedule.device.name %></td>
         <td><%= schedule.package.name %></td>
         <td><%= schedule.start_date_time %></td>
