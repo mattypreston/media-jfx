@@ -35,7 +35,33 @@
     <ul class="unstyled pagination-centered">
       <% @users.all.each do |user| %>
         <li><%= "#{user.name} has a token of"%> <%=  user.authentication_token.blank? ? "Token Empty" : user.authentication_token %></li>
+        <li><%= "#{user.as_json}" %></li>
       <% end %>
     </ul>
 </div>
+
+<div id='calendar'></div>
+
+
+<%= javascript_include_tag "fullcalendar/fullcalendar" %>
+
+<script>
+    $(function () {
+        $('#calendar').fullCalendar({
+            dayClick: function() {
+                    alert('a day has been clicked!');
+            }
+        });
+
+        var $fcButtons = $('[class*="fc-button"]').addClass('btn'),
+            $oldTable = $('.fc-header-right > table');
+
+        $('<div>')
+            .addClass('btn-group')
+            .appendTo('.fc-header-right')
+            .append($fcButtons);
+
+        $oldTable.remove();
+    });
+</script>
 

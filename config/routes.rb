@@ -23,7 +23,13 @@ MediaJfx::Application.routes.draw do
       get 'media/get_package/:package_id' => 'media#get_package'
       post 'media/force_schedule_to_be_current/:schedule_id' => 'media#force_schedule_to_be_current'
       post 'media/remove_force_flag_from_schedule/:schedule_id' => 'media#remove_force_flag_from_schedule'
+      post 'media/add_asset_to_package/:package_id' => 'media#add_asset_to_package'
+
       get 'authentication/get_token/:user_name' => 'authentication#get_token'
+
+      post 'ping/device_ping/:device_id/:package_id' => 'ping#device_ping'
+
+
 
     end
   end

@@ -17,6 +17,7 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require bootstrap-datetimepicker
 //= require_tree .
+//= require fullcalendar/fullcalendar
 
 $(function(){
     $("#btn_browse").on("click", function(event)

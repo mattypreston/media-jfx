@@ -113,6 +113,36 @@ module Api
         end
       end
 
+      def add_asset_to_package
+        @errors = []
+
+        begin
+          assets = params[:assets]
+          assets.each do |asset|
+            @asset = Asset.new()
+            file = asset[:asset_file]
+            #media_type = file.split('/')[1].split(':')[0]
+            #media_type = 'mov' if /quicktime/.match(media_type.downcase)
+            @asset.package_id = params[:package_id]
+            @asset.asset_file = file.present? ? file : nil
+            #@asset.media_type = media_type
+            @asset.save!
+          end
+          puts "Image uploaded"
+        rescue Exception => e
+          @errors << {:error_no => 99, :message => e.message}
+        end
+        respond_to do |format|
+          if @errors.empty?
+            format.json {render :json => {:response => :success}}
+          else
+            format.json {render :json => {:errors => @errors}}
+          end
+        end
+
+
+      end
+
 
     end
   end
