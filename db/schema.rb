@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130330131250) do
+ActiveRecord::Schema.define(:version => 20130707095538) do
 
   create_table "assets", :force => true do |t|
     t.integer  "package_id"
     t.string   "name"
     t.string   "asset_file"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
-    t.string   "media_type", :limit => 4
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.string   "media_type",        :limit => 4
+    t.boolean  "uploaded_over_api"
+    t.string   "directory"
   end
 
   create_table "devices", :force => true do |t|

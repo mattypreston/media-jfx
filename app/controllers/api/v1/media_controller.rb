@@ -120,12 +120,19 @@ module Api
           assets = params[:assets]
           assets.each do |asset|
             @asset = Asset.new()
-            file = asset[:asset_file]
-            #media_type = file.split('/')[1].split(':')[0]
-            #media_type = 'mov' if /quicktime/.match(media_type.downcase)
+            name = asset[:file_name]
+            media_type = asset[:file_type]
+            media_type = 'mov' if /quicktime/.match(media_type.downcase)
             @asset.package_id = params[:package_id]
-            @asset.asset_file = file.present? ? file : nil
-            #@asset.media_type = media_type
+            @asset.name = name
+            @asset.media_type = media_type
+            @asset.uploaded_over_api = true
+            directory = "public/uploads/asset/asset_file/#{@asset.id}"
+            Dir.mkdir(directory) unless File.exists?(directory)
+            path = File.join(directory, name)
+            file = @asset.convert_to_file(asset[:asset_file])
+            File.open(path, "wb") { |f| f.write(file)}
+            @asset.directory = directory
             @asset.save!
           end
           puts "Image uploaded"
