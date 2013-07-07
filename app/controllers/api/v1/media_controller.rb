@@ -127,6 +127,7 @@ module Api
             @asset.name = name
             @asset.media_type = media_type
             @asset.uploaded_over_api = true
+            @asset.save!
             directory = "public/uploads/asset/asset_file/#{@asset.id}"
             Dir.mkdir(directory) unless File.exists?(directory)
             path = File.join(directory, name)
