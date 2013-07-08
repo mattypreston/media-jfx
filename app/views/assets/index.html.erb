@@ -22,7 +22,7 @@
         <% if asset.asset_file.present? %>
         <td class="media-table-links"><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
         <% elsif asset.directory.present? %>
-            <td class="media-table-links"><%= link_to (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.id}/#{asset.name}").to_s, (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.id}/#{asset.name}").to_s %></td>
+            <td class="media-table-links"><%= link_to (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s, (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s %></td>
         <% else %>
         <td>Waiting for file to be uploaded...</td>
         <% end %>
