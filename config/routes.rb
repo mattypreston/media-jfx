@@ -25,7 +25,7 @@ MediaJfx::Application.routes.draw do
       post 'media/remove_force_flag_from_schedule/:schedule_id' => 'media#remove_force_flag_from_schedule'
       post 'media/add_asset_to_package/:package_id' => 'media#add_asset_to_package'
 
-      get 'authentication/get_token/:user_name' => 'authentication#get_token'
+      post 'authentication/get_token' => 'authentication#get_token'
 
       post 'ping/device_ping/:device_id/:package_id' => 'ping#device_ping'
 
