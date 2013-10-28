@@ -118,6 +118,9 @@ module Api
 
         begin
           assets = params[:assets]
+          package = Package.find(params[:package_id])
+          package.remove_all_previous_assets unless package.nil?
+
           assets.each do |asset|
             @asset = Asset.new()
             name = asset[:file_name]

@@ -14,7 +14,7 @@ Feature: Media API
     Then I send a GET request to "/api/media/get_package/1.json?"
     Then show me the response
     Then the response status should be "200"
-    And the JSON response should have an array of "1" records
+
 
   Scenario: Force schedule to be current
     Then I send a POST request to "/api/media/force_schedule_to_be_current/1.json?"
@@ -43,7 +43,7 @@ Feature: Media API
     Then show me the response
     Then the response status should be "200"
     And the JSON response should have an array of "1" records
-
+    Then I should have "1" assets for this package with id of "1"
   #Scenario: Check invalid device id response returns an error
   #  pending
   #Scenario: Check package has a status of live

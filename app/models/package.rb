@@ -13,4 +13,13 @@ class Package < ActiveRecord::Base
     hash
   end
 
+  def remove_all_previous_assets
+    self.assets.each do |asset|
+      File.exists?("#{asset.directory}/#{asset.name}") if asset.directory.present?
+      File.delete("#{asset.directory}/#{asset.name}")
+      Dir.delete(asset.directory)
+      Asset.delete(asset.id)
+    end unless self.assets.empty?
+  end
+
 end

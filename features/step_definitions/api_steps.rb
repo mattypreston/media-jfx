@@ -94,3 +94,8 @@ Then 'the JSON response should be:' do |json|
     assert_equal actual, response
   end
 end
+
+Then /^I should have "([^"]*)" assets for this package with id of "([^"]*)"$/ do |count, package_id|
+  package = Package.find(package_id)
+  assert package.assets.size == count.to_i
+end
