@@ -142,6 +142,13 @@ module Api
         begin
           assets = params[:assets]
           package_name = params[:name]
+          #Check to see if one exists with the same name
+          #If it does then blat it and all associated assets first.
+          package = Package.find_by_name(package_name)
+          if package.present?
+            package.remove_all_previous_assets
+            package.delete
+          end
           package = Package.new
           package.name = package_name
           package.save!

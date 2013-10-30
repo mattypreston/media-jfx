@@ -64,6 +64,7 @@ Feature: Media API
     Then the response status should be "200"
     And the JSON response should have an array of "1" records
     Then I should have "1" package with the name of "My New Package"
+    Then I should have "1" assets for this package with id of "1"
 
 #Scenario: Check invalid device id response returns an error
   #  pending
