@@ -22,4 +22,21 @@ class Package < ActiveRecord::Base
     end unless self.assets.empty?
   end
 
+  def create_associated_assets(package_id, assets, uploaded_over_api)
+    assets.each do |asset|
+      @asset = Asset.new()
+      name = asset[:file_name]
+      media_type = asset[:file_type]
+      media_type = 'mov' if /quicktime/.match(media_type.downcase)
+      @asset.package_id = package_id
+      @asset.name = name
+      @asset.media_type = media_type
+      @asset.uploaded_over_api = uploaded_over_api
+      @asset.save!
+      @asset.save_to_disk(name, asset[:asset_file])
+      @asset.save!
+    end
+
+  end
+
 end

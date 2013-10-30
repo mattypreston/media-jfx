@@ -99,3 +99,8 @@ Then /^I should have "([^"]*)" assets for this package with id of "([^"]*)"$/ do
   package = Package.find(package_id)
   assert package.assets.size == count.to_i
 end
+
+Then /^I should have "([^"]*)" package with the name of "([^"]*)"$/ do |count, package_name|
+  package = Package.find_by_name(package_name)
+  assert package.present?
+end

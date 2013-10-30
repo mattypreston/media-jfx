@@ -120,25 +120,7 @@ module Api
           assets = params[:assets]
           package = Package.find(params[:package_id])
           package.remove_all_previous_assets unless package.nil?
-
-          assets.each do |asset|
-            @asset = Asset.new()
-            name = asset[:file_name]
-            media_type = asset[:file_type]
-            media_type = 'mov' if /quicktime/.match(media_type.downcase)
-            @asset.package_id = params[:package_id]
-            @asset.name = name
-            @asset.media_type = media_type
-            @asset.uploaded_over_api = true
-            @asset.save!
-            directory = "public/uploads/asset/asset_file/#{@asset.id}"
-            Dir.mkdir(directory) unless File.exists?(directory)
-            path = File.join(directory, name)
-            file = @asset.convert_to_file(asset[:asset_file])
-            File.open(path, "wb") { |f| f.write(file)}
-            @asset.directory = directory
-            @asset.save!
-          end
+          package.create_associated_assets(package.id, assets, true)
           puts "Image uploaded"
         rescue Exception => e
           @errors << {:error_no => 99, :message => e.message}
@@ -151,6 +133,30 @@ module Api
           end
         end
 
+
+      end
+
+      def add_new_package
+        @errors = []
+
+        begin
+          assets = params[:assets]
+          package_name = params[:name]
+          package = Package.new
+          package.name = package_name
+          package.save!
+          package.create_associated_assets(package.id, assets, true)
+        rescue Exception => e
+          @errors << {:error_no => 99, :message => e.message}
+        end
+
+        respond_to do |format|
+          if @errors.empty?
+            format.json {render :json => {:response => :success}}
+          else
+            format.json {render :json => {:errors => @errors}}
+          end
+        end
 
       end
 

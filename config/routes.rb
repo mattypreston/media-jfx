@@ -24,6 +24,7 @@ MediaJfx::Application.routes.draw do
       post 'media/force_schedule_to_be_current/:schedule_id' => 'media#force_schedule_to_be_current'
       post 'media/remove_force_flag_from_schedule/:schedule_id' => 'media#remove_force_flag_from_schedule'
       post 'media/add_asset_to_package/:package_id' => 'media#add_asset_to_package'
+      post 'media/add_new_package' => 'media#add_new_package'
 
       post 'authentication/get_token' => 'authentication#get_token'
 
