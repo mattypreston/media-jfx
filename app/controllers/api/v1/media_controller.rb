@@ -147,19 +147,23 @@ module Api
           package = Package.find_by_name(package_name)
           if package.present?
             package.remove_all_previous_assets
-            package.delete
+            #package.delete
           end
-          package = Package.new
-          package.name = package_name
-          package.save!
-          package.create_associated_assets(package.id, assets, true)
+          if package_name.present?
+            package = Package.new unless package.present?
+            package.name = package_name
+            package.save!
+            package.create_associated_assets(package.id, assets, true)
+          else
+            @errors << {:error_no => 1, :message => "No package name provided"}
+          end
         rescue Exception => e
           @errors << {:error_no => 99, :message => e.message}
         end
 
         respond_to do |format|
           if @errors.empty?
-            format.json {render :json => {:response => :success}}
+            format.json {render :json => {:response => :success, :package_id => "#{package.id}"}}
           else
             format.json {render :json => {:errors => @errors}}
           end
@@ -167,6 +171,31 @@ module Api
 
       end
 
+      def upload_asset_chunk
+        @errors = []
+        begin
+          assets = params[:assets]
+          @errors << Asset.validate_asset_request(assets)
+          assets.each do |asset|
+            asset_file = Asset.find_by_package_id_and_name(asset[:package_id], asset[:file_name])
+            if asset_file.present?
+              asset_file.append_chunk(asset[:asset_file])
+            end
+          end if @errors.empty? or @errors[0].length.eql?(0)
+
+          #Check to see if one exists with the same name
+          #If it does then blat it and all associated assets first.
+        rescue Exception => e
+          @errors << {:error_no => 99, :message => e.message}
+        end
+        respond_to do |format|
+          if @errors.empty? or @errors.size.eql?(1)
+            format.json {render :json => {:response => :success}}
+          else
+            format.json {render :json => {:errors => @errors}}
+          end
+        end
+      end
 
     end
   end

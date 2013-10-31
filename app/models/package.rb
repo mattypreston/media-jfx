@@ -32,11 +32,13 @@ class Package < ActiveRecord::Base
       @asset.name = name
       @asset.media_type = media_type
       @asset.uploaded_over_api = uploaded_over_api
+      @asset.expected_chunks = asset[:expected_chunks]
+      @asset.received_chunks = 0
       @asset.save!
-      @asset.save_to_disk(name, asset[:asset_file])
+      @asset.save_to_disk(name, asset[:asset_file]) unless asset[:asset_file].nil?
       @asset.save!
     end
-
   end
+
 
 end
