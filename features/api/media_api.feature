@@ -51,7 +51,7 @@ Feature: Media API
     When I send a POST request to "/api/media/add_new_package.json?" with the following:
     """
         {
-          "name": "My New Package",
+          "name": "Test Package",
           "scene": "",
           "assets": [
                       {

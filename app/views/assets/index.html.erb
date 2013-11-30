@@ -15,23 +15,25 @@
   </thead>
   <tbody>
     <% @assets.each do |asset| %>
-      <tr>
-        <td class="media-table-links"><%= link_to asset.id, asset_path(asset) %></td>
-        <td><%= asset.package.name %></td>
-        <td><%= asset.name %></td>
-        <% if asset.asset_file.present? %>
-        <td class="media-table-links"><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
-        <% elsif asset.directory.present? %>
-            <td class="media-table-links"><%= link_to (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s, (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s %></td>
-        <% else %>
-        <td>Waiting for file to be uploaded...</td>
-        <% end %>
-        <td><%= asset.media_type %></td>
-        <td>
-          <%= edit_button(edit_asset_path(asset)) %>
-          <%= delete_button(asset_path(asset)) %>
-        </td>
-      </tr>
+      <% if asset.package.present? %>
+          <tr>
+            <td class="media-table-links"><%= link_to asset.id, asset_path(asset) %></td>
+            <td><%= asset.package.name %></td>
+            <td><%= asset.name %></td>
+            <% if asset.asset_file.present? %>
+                <td class="media-table-links"><%= link_to (URI.parse(root_url) + asset.asset_file.url).to_s, (URI.parse(root_url) + asset.asset_file.url).to_s %></td>
+            <% elsif asset.directory.present? %>
+                <td class="media-table-links"><%= link_to (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s, (URI.parse(root_url) + "#{asset.directory.gsub('public', '')}/#{asset.name}").to_s %></td>
+            <% else %>
+                <td>Waiting for file to be uploaded...</td>
+            <% end %>
+            <td><%= asset.media_type %></td>
+            <td>
+              <%= edit_button(edit_asset_path(asset)) %>
+              <%= delete_button(asset_path(asset)) %>
+            </td>
+          </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

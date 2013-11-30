@@ -1,6 +1,7 @@
 class Package < ActiveRecord::Base
-  has_many :schedules
-  has_many :assets
+  has_many :schedules, dependent: :destroy
+  has_many :assets, dependent: :destroy
+
   attr_accessible :name, :fxml
   include Rails.application.routes.url_helpers
 

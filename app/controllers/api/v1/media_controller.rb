@@ -141,7 +141,8 @@ module Api
 
         begin
           assets = params[:assets]
-          package_name = params[:name]
+          package_name =  params[:name]
+          scene = params[:scene]
           #Check to see if one exists with the same name
           #If it does then blat it and all associated assets first.
           package = Package.find_by_name(package_name)
@@ -152,6 +153,7 @@ module Api
           if package_name.present?
             package = Package.new unless package.present?
             package.name = package_name
+            package.fxml = scene
             package.save!
             package.create_associated_assets(package.id, assets, true)
           else
