@@ -72,7 +72,8 @@ class Asset < ActiveRecord::Base
                     @errors << {:error_no => 2, :message => "missing or incomplete asset file which means invalid chunk size for asset #{asset.to_s}"}
                   else
                     if asset[:chunk_size].nil? or asset[:chunk_size].size.eql?(0) or (asset[:chunk_size].to_i != asset[:asset_file].size)
-                      @errors << {:error_no => 2, :message => "invalid chunk size for asset #{asset.to_s}"}
+                      #@errors << {:error_no => 2, :message => "invalid chunk size for asset #{asset.to_s}"}
+                      puts "Asset file mismatch - bytes #{asset[:asset_file]} sent, bytes received #{asset[:asset_file].size}"
                     end
                   end
                 else
