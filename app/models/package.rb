@@ -9,6 +9,10 @@ class Package < ActiveRecord::Base
     hash = super(options.merge({:only => [:id, :name, :fxml]}).merge({:include => :assets}))
     hash[:assets].each do |asset|
       asset_url = "#{MEDIA_JFX_CONFIG['url_prefix']}#{asset['asset_file']['url']}" if asset['asset_file']['url'].present?
+      if (asset['uploaded_over_api'])
+        asset_url = "#{MEDIA_JFX_CONFIG['url_prefix']}#{asset['directory'].gsub('public', '')}/#{asset['name']}"
+      end
+
       asset['asset_file']['url'] = asset_url if asset_url.present?
     end
     hash
